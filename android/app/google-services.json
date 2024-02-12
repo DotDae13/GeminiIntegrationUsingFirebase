@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "630332041411",
+    "project_id": "inferno-solutionchallenge-2024",
+    "storage_bucket": "inferno-solutionchallenge-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630332041411:android:629414a15f9b90efad5a76",
+        "android_client_info": {
+          "package_name": "com.example.geminiv3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAuo-271tvlvP_ndLrKBCISz9BqGEdVOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
