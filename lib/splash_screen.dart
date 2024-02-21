@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:friday/firebase_controller.dart';
+import 'package:emo/gemini_chatbot_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,12 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.blue, // GoldenBrown color
       body: Center(
         child: Text(
-          'Friday',
+          'EMO',
           style: TextStyle(
             color: Color(0xFFDAA520), // Custom text color
             fontSize: 40,
             fontWeight: FontWeight.bold,
-            fontFamily:  "FONT", // Specify your preferred font family
+             // Specify your preferred font family
           ),
         ),
       ),

@@ -13,7 +13,7 @@ class ChatbotIntegration extends StatefulWidget {
 
 class _ChatbotIntegrationState extends State<ChatbotIntegration> {
   ChatUser myself = ChatUser(id: '1', firstName: 'User');
-  ChatUser bot = ChatUser(id: '2', firstName: 'Friday');
+  ChatUser bot = ChatUser(id: '2', firstName: 'Emo');
   List<ChatMessage> allMessages = [];
   List<ChatUser> typing = [];
   final TextEditingController _promptController = TextEditingController();
@@ -23,6 +23,7 @@ class _ChatbotIntegrationState extends State<ChatbotIntegration> {
   FirebaseFirestore.instance.collection('Users').doc('test@gmail.com').collection('messages');
 
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _snapshotSubscription;
+  bool isFirstTime = true;
 
   @override
   void initState() {
@@ -38,15 +39,19 @@ class _ChatbotIntegrationState extends State<ChatbotIntegration> {
         if (data['response'] != null && data['response'].isNotEmpty) {
           _responseController.text = data['response'];
 
-          // Add the Firestore response to DashChat
-          ChatMessage firestoreResponse = ChatMessage(
-            text: data['response'],
-            user: bot,
-            createdAt: DateTime.now(),
-          );
-          allMessages.insert(0, firestoreResponse);
+          if (!isFirstTime) {
+            // Add the Firestore response to DashChat only if it's not the first time
+            ChatMessage firestoreResponse = ChatMessage(
+              text: data['response'],
+              user: bot,
+              createdAt: DateTime.now(),
+            );
+            allMessages.insert(0, firestoreResponse);
 
-          setState(() {});
+            setState(() {});
+          }
+
+          isFirstTime = false;
         }
       }
     });
@@ -71,17 +76,16 @@ class _ChatbotIntegrationState extends State<ChatbotIntegration> {
       _promptController.clear();
       typing.remove(bot);
     } catch (e) {
-      "Error";
+      print("Error: $e");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Friday')),
+      appBar: AppBar(title: const Text('Emo')),
       body: Column(
         children: [
-          // DashChat
           Expanded(
             child: DashChat(
               typingUsers: typing,
@@ -90,7 +94,6 @@ class _ChatbotIntegrationState extends State<ChatbotIntegration> {
                 typing.add(bot);
                 // Send user message to Firestore
                 sendMessageToFirestore(m.text);
-
                 // Add user message to DashChat
                 allMessages.insert(0, m);
 
